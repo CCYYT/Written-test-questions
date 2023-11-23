@@ -1,0 +1,10 @@
+Img:
+  SavePath: "K:\\Test\\untitled7\\src\\main\\resources\\snapshot"
+
+CSVPath:
+  BrokenPriceGoods: "K:\\Test\\untitled7\\src\\main\\resources\\static\\haman_2023102801.csv"
+
+#Task:
+#  time:
+#    PulledBrokenPriceGoods: 5000
+
