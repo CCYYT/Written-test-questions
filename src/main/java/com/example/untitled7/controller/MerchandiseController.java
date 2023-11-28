@@ -24,11 +24,12 @@ public class MerchandiseController {
         return brokenPriceGoodsList != null?Result.ok(brokenPriceGoodsList):Result.fail();
     }
 
-    /*
-    * 添加破价链接
-    * */
-    @PostMapping("/breakPriceUrls")
-    public Result breakPriceUrls(@RequestBody BrokenPriceGoods brokenPriceGoods){
-        return brokenPriceGoodsService.addBrokenPriceGoods(brokenPriceGoods)?Result.ok("ok"):Result.fail();
-    }
+//    /*
+//    * 添加破价链接
+//    * */
+//    @PostMapping("/breakPriceUrls")
+//    public Result breakPriceUrls(@RequestBody BrokenPriceGoods brokenPriceGoods){
+//        return brokenPriceGoodsService.addBrokenPriceGoods(brokenPriceGoods)?Result.ok("ok"):Result.fail();
+//    }
+
 }

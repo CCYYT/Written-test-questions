@@ -7,8 +7,9 @@ public class BrokenPriceGoods {
     private String pageUrl;//商品链接
     private String batchNo;//批次号
     private String sku_id;
-    private String platform;//平台
-
+    private String platformName;//平台
+    private Integer status;//链接状态
+    private Long time;//获取到链接时的时间戳
     public Integer getId() {
         return id;
     }
@@ -41,22 +42,33 @@ public class BrokenPriceGoods {
         this.sku_id = sku_id;
     }
 
-    public String getPlatform() {
-        return platform;
+    public String getPlatformName() {
+        return platformName;
     }
 
-    public void setPlatform(String platform) {
-        this.platform = platform;
+    public void setPlatformName(String platformName) {
+        this.platformName = platformName;
     }
 
-    @Override
-    public String toString() {
-        return "BrokenPriceGoods{" +
-                "id=" + id +
-                ", pageUrl='" + pageUrl + '\'' +
-                ", batchNo='" + batchNo + '\'' +
-                ", sku_id='" + sku_id + '\'' +
-                ", platform='" + platform + '\'' +
-                '}';
+    public Integer getStatus() {
+        return status;
+    }
+
+    public void setStatus(Integer status) {
+        this.status = status;
+    }
+
+    public Long getTime() {
+        return time;
+    }
+
+    public void setTime(Long time) {
+        this.time = time;
+    }
+
+    public static class STATUS{
+        public static final Integer NotObtained = 0;//未获取的链接
+        public static final Integer Obtained = 1;//已获取的链接
+        public static final Integer Completed = 2;//上传了截图的链接
     }
 }

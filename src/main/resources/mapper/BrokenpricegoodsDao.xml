@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.untitled7.dao.BrokenPriceGoodsDao">
+
+    <resultMap type="com.example.untitled7.domain.BrokenPriceGoods" id="BrokenPriceGoodsMap">
+        <result property="id" column="id" jdbcType="INTEGER"/>
+        <result property="batchNo" column="batch_no" jdbcType="VARCHAR"/>
+        <result property="platformName" column="platform_name" jdbcType="VARCHAR"/>
+        <result property="pageUrl" column="page_url" jdbcType="VARCHAR"/>
+        <result property="sku_id" column="sku_id" jdbcType="VARCHAR"/>
+        <result property="status" column="status" jdbcType="INTEGER"/>
+        <result property="time" column="time" jdbcType="TIMESTAMP"/>
+    </resultMap>
+
+<!--    &lt;!&ndash;查询单个&ndash;&gt;-->
+<!--    <select id="queryById" resultMap="BrokenPriceGoodsMap">-->
+<!--        select-->
+<!--          id, batch_no, platform_name, page_url, sku_id, status, time-->
+<!--        from brokenpricegoods-->
+<!--        where id = #{id}-->
+<!--    </select>-->
+
+    <!--批量获取破价信息-->
+    <select id="queryByPlatformAndBatchNoAndCount" resultMap="BrokenPriceGoodsMap">
+        select id from broken_price_goods
+        where status = #{status}
+            and platform_name = #{platform}
+            and batch_no = #{batchNo}
+            LIMIT #{count}
+    </select>
+
+<!--    update broken_price_goods as bpg-->
+<!--    join (-->
+<!--    select id from broken_price_goods-->
+<!--    where status = 0-->
+<!--    and platform_name = #{platform}-->
+<!--    and batch_no = #{batchNo}-->
+<!--    LIMIT #{count}-->
+<!--    ) as bpg_id-->
+<!--    on bpg.id = bpg_id.id-->
+<!--    set bpg.status = 1, bpg.time = NOW()-->
+
+    <!--批量修改链接状态-->
+    <update id="batchSetStatusByIds">
+        update broken_price_goods
+        set status = #{status} , time = NOW()
+        where id in
+            <foreach collection="ids" item="id" separator="," open="(" close=")">
+                #{id}
+            </foreach>
+
+    </update>
+
+    <!--修改链接的状态 通过sku_id-->
+    <update id="setStatusBySkuId">
+        update broken_price_goods
+        set status = #{status}
+        where sku_id = #{sku_id}
+    </update>
+
+    <!--批量修改状态 通过时间差与状态值，现在的时间-time字段的时间 如果大于timeDifference就修改状态-->
+    <update id="batchSetStatusByThroughTimeDifference">
+        update broken_price_goods
+        set status = #{status}
+        where status = #{preStatus} and NOW()-time > #{timeDifference}
+    </update>
+
+
+<!--    &lt;!&ndash;通过主键删除&ndash;&gt;-->
+<!--    <delete id="deleteById">-->
+<!--        delete from brokenpricegoods where id = #{id}-->
+<!--    </delete>-->
+
+</mapper>
+

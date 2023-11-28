@@ -7,6 +7,10 @@ import java.util.List;
 public interface BrokenPriceGoodsService {
 
     List<BrokenPriceGoods> getBrokenPriceGoodsByPlatformAndBatchNoAndCount(String platform, String batchNo, Integer count);
+    Integer resetExpiredLinkStatus(Long timeDifference);
 
-    boolean addBrokenPriceGoods(BrokenPriceGoods brokenPriceGoods);
+    Integer linkCompleted(String sku_id);
+
+
+//    boolean addBrokenPriceGoods(BrokenPriceGoods brokenPriceGoods);
 }

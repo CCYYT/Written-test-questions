@@ -4,7 +4,27 @@ Img:
 CSVPath:
   BrokenPriceGoods: "K:\\Test\\untitled7\\src\\main\\resources\\static\\haman_2023102801.csv"
 
-#Task:
-#  time:
-#    PulledBrokenPriceGoods: 5000
+Task:
+  time:
+    PulledBrokenPriceGoods:
+      #超过3分钟没上传的链接
+      TimeDifference: 180
+
+server:
+  port: 80
+spring:
+  datasource:
+    url: jdbc:mysql://localhost:3306/written_test_questions?characterEncoding=utf-8&serverTimezone=Asia/Shanghai&useSSL=false&useSSL=false&allowPublicKeyRetrieval=true
+    username: root
+    password: '000000'
+    driver-class-name: com.mysql.cj.jdbc.Driver
+mybatis:
+  configuration:
+    #开启mybatis驼峰命名规则自动装换
+    map-underscore-to-camel-case: true
+  #    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl #打印mybatis执行的sql语句
+  mapper-locations: classpath*:/mapper/*Dao.xml   #加载mapper.xml文件
+  type-aliases-package: com.example.untitled7.domain  # 指定实体类的包路径，这个包下的所有类将进行别名的定义
+
+
 
